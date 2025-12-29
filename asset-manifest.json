@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/live-teaching/static/css/main.8f0a877f.css",
+    "main.js": "/live-teaching/static/js/main.3925ef76.js",
+    "static/js/206.b66f203a.chunk.js": "/live-teaching/static/js/206.b66f203a.chunk.js",
+    "index.html": "/live-teaching/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.8f0a877f.css",
+    "static/js/main.3925ef76.js"
+  ]
+}

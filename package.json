@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "firebase": "^10.12.3",
-    "gh-pages": "^6.1.1",
     "js-cookie": "^3.0.5",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
@@ -19,11 +18,13 @@
     "react-speech-recognition": "^3.10.0",
     "web-vitals": "^2.1.4"
   },
-"scripts": {
+  "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test",
     "build": "react-scripts build",
     "build:prod": "npm run build && npm run optimize",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "optimize": "npx terser build/static/js/*.js --compress --mangle --output-dir build/static/js/ && npx cleancss-cli build/static/css/*.css --output-dir build/static/css/"
   },
   "eslintConfig": {
@@ -43,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

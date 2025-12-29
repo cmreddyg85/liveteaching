@@ -23,15 +23,13 @@ const MainPage = () => {
   const [buttonsPopUp, setButtonsPopUp] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
 
-
-
   // const { listening, browserSupportsContinuousListening } =
   //   useSpeechRecognition();
   // const { transcript, resetTranscript, browserSupportsSpeechRecognition } =
   //   useSpeechRecognition({ commandss });
 
-    const [text, setText] = useState("");
-    const { transcript, listening, resetTranscript } = useSpeechRecognition();
+  const [text, setText] = useState("");
+  const { transcript, listening, resetTranscript } = useSpeechRecognition();
 
   useEffect(() => {
     const userId = localStorage.getItem("userInfo");
@@ -42,7 +40,9 @@ const MainPage = () => {
     }
     if (userId) {
       axios
-        .get("https://gallant-69c58-default-rtdb.firebaseio.com/users.json")
+        .get(
+          "https://livelearning-5e710-default-rtdb.firebaseio.com/users.json"
+        )
         .then((response) => {
           const fetchedData = response.data;
           const userExisitingData = fetchedData[userId];
@@ -96,7 +96,9 @@ const MainPage = () => {
 
   const formatTextToHTML = (text) => {
     let sentences = text.split(/[.\n]+/).filter(Boolean);
-    let formattedHTML = `<ul>${sentences.map(sentence => `<li>${sentence.trim()}</li>`).join("")}</ul>`;
+    let formattedHTML = `<ul>${sentences
+      .map((sentence) => `<li>${sentence.trim()}</li>`)
+      .join("")}</ul>`;
     return formattedHTML;
   };
 
@@ -121,17 +123,17 @@ const MainPage = () => {
   const handleSendButton = () => {
     handleResetMicData();
     let chatInputData = text || transcript;
-  
+
     // Function to check if string contains HTML tags
     const containsHTML = (str) => /<\/?[a-z][\s\S]*>/i.test(str);
-  
+
     // If 'text' is plain, convert it into structured HTML
     if (!containsHTML(text) && text) {
       chatInputData = formatTextToHTML(text);
     }
-  
+
     setButtonsPopUp(true);
-  
+
     if (userId && chatInputData.trim() !== "") {
       const chatRef = ref(database, `data${userId}`);
       set(chatRef, { chatInputData })
@@ -140,7 +142,7 @@ const MainPage = () => {
           console.error("Error adding data to Firebase: ", error);
         });
     }
-  
+
     SpeechRecognition.stopListening();
     setTimeout(() => {
       setButtonsPopUp(false);
@@ -161,14 +163,14 @@ const MainPage = () => {
 
   const handleResetMicData = () => {
     const chatRef = ref(database, `text${userId}`);
-    set(chatRef, { transcript:"" })
-    .then(() => {
-      resetTranscript();
-    })
-    .catch((error) => {
-      console.error("Error adding data to Firebase: ", error);
-    });
-  }
+    set(chatRef, { transcript: "" })
+      .then(() => {
+        resetTranscript();
+      })
+      .catch((error) => {
+        console.error("Error adding data to Firebase: ", error);
+      });
+  };
 
   const handleResetTypeData = () => {
     const chatRef = ref(database, `data${userId}`);
@@ -179,11 +181,7 @@ const MainPage = () => {
       .catch((error) => {
         console.error("Error adding data to Firebase: ", error);
       });
-  }
-
-
-
-
+  };
 
   const handleGenerateLink = () => {
     if (userId) {
@@ -219,7 +217,6 @@ const MainPage = () => {
     setText(item.text);
   };
 
-
   const copyToClipboard = () => {
     navigator.clipboard
       .writeText(userLink)
@@ -254,9 +251,9 @@ const MainPage = () => {
   };
 
   const handleStartListening = () => {
-    setText("")
+    setText("");
     resetTranscript(); // Clear previous transcript
-    handleResetTypeData()
+    handleResetTypeData();
     SpeechRecognition.startListening({ continuous: true, language: "en-US" });
   };
 
@@ -304,7 +301,11 @@ const MainPage = () => {
         <div className="rightSectionBottomContainer">
           <div
             className="MobileCommandsContainer"
-            style={{ height: "150px", display: "flex", flexDirection: "column" }}
+            style={{
+              height: "150px",
+              display: "flex",
+              flexDirection: "column",
+            }}
           >
             <div class="search-container-mobile">
               <input
@@ -316,14 +317,14 @@ const MainPage = () => {
               />
             </div>
             <ul className="questions">
-            {filteredCommands?.map((item) => (
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => handleCommand(item)}
-              >
-                {item.command}
-              </li>
-            ))}
+              {filteredCommands?.map((item) => (
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleCommand(item)}
+                >
+                  {item.command}
+                </li>
+              ))}
             </ul>
           </div>
           {/* <textarea
@@ -362,19 +363,22 @@ const MainPage = () => {
             onChange={(e) => setText(e.target.value)}
           />
           <div className="mainPbuttonsContainer">
-            {listening ?
-            <button className="startButton button" onClick={SpeechRecognition.stopListening}>Stop Listening</button>
-           
-            :
-            <button
-            onClick={handleStartListening}
-            className="startButton button"
-            >
-             Listen
-            </button>
-            
-            }
-           
+            {listening ? (
+              <button
+                className="startButton button"
+                onClick={SpeechRecognition.stopListening}
+              >
+                Stop Listening
+              </button>
+            ) : (
+              <button
+                onClick={handleStartListening}
+                className="startButton button"
+              >
+                Listen
+              </button>
+            )}
+
             <button
               id="sendButton"
               onClick={handleSendButton}

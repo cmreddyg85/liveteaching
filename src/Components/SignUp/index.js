@@ -115,7 +115,7 @@ const SignUp = () => {
     <main>
       <div className="signup-page">
         <div className="signup-container">
-          <h1>Gallant</h1>
+          <h1>Live Teaching</h1>
           <form
             autoComplete="off"
             className="signup-form"

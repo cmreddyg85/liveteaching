@@ -122,7 +122,7 @@ const SignIn = () => {
   return (
     <React.Fragment>
       <main>
-        <h1>Gallant</h1>
+        <h1>Live Teaching</h1>
         <div className="main-container">
           <div class="login-container">
             <form class="login-form" onSubmit={checkData}>

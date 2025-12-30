@@ -1,6 +1,6 @@
 const commandss = [
   {
-    command: "hr",
+    command: "azure",
     text: `<p>Hii! I am [Your Name],
   
           From the past five years, I've been dedicated to develop user-friendly and visually appealing web applications as a front-end developer. My primary focus has been on utilizing React.js to build interactive and dynamic user interfaces.</p>

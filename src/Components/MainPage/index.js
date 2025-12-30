@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 import axios from "axios";
 import "./index.css";
@@ -8,7 +8,9 @@ import { database } from "../../Firebase";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-import commandss from "../../data";
+import reactData from "../../react-data";
+import dotnetData from "../../dotnet-data";
+import javaData from "../../java-data";
 
 const MainPage = () => {
   const userId = localStorage.getItem("userInfo");
@@ -19,22 +21,15 @@ const MainPage = () => {
   const [userLink, setUserLink] = useState("");
   const [linkCopied, setLinkCopied] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
-  const [buttonsPopUp, setButtonsPopUp] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-
-  // const { listening, browserSupportsContinuousListening } =
-  //   useSpeechRecognition();
-  // const { transcript, resetTranscript, browserSupportsSpeechRecognition } =
-  //   useSpeechRecognition({ commandss });
-
   const [text, setText] = useState("");
+  const [selectedTech, setSelectedTech] = useState("react");
+
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
+  const textDebounceRef = useRef(null);
 
   useEffect(() => {
     const userId = localStorage.getItem("userInfo");
-    //   const userId = Cookies.get("userInfo")
-    //   const userId = sessionStorage.getItem("userInfo");
     if (!userId) {
       navigate("/login");
     }
@@ -62,7 +57,6 @@ const MainPage = () => {
         navigationTiming.type !== "back_forward" &&
         navigationTiming.type !== "navigate"
       ) {
-        // If the page is being unloaded (i.e., the browser window is being closed), clear localStorage
         localStorage.clear();
       }
     } catch (error) {
@@ -72,19 +66,46 @@ const MainPage = () => {
 
   window.addEventListener("beforeunload", handleBeforeUnload);
 
-  const chatRef = ref(database, `text${userId}`);
-  set(chatRef, { transcript })
-    .then(() => {
-      console.log("Added Successfully to Firebase");
-    })
-    .catch((error) => {
-      console.error("Error adding data to Firebase: ", error);
-    });
+  // Live update text to Firebase as user types
+  useEffect(() => {
+    if (userId && (text || transcript)) {
+      // Clear previous timeout
+      if (textDebounceRef.current) {
+        clearTimeout(textDebounceRef.current);
+      }
+
+      // Debounce the Firebase update (wait 500ms after user stops typing)
+      textDebounceRef.current = setTimeout(() => {
+        const chatInputData = text ? formatTextToHTML(text) : transcript;
+        const chatRef = ref(database, `data${userId}`);
+        set(chatRef, { chatInputData })
+          .then(() => {
+            console.log("Live update sent to Firebase");
+          })
+          .catch((error) => {
+            console.error("Error adding data to Firebase: ", error);
+          });
+      }, 500);
+    }
+
+    return () => {
+      if (textDebounceRef.current) {
+        clearTimeout(textDebounceRef.current);
+      }
+    };
+  }, [text, transcript, userId]);
+
+  const commands =
+    selectedTech === "react"
+      ? reactData
+      : selectedTech === "dotnet"
+      ? dotnetData
+      : javaData;
 
   const filteredCommands =
-    commandss?.filter((command) =>
+    commands?.filter((command) =>
       command.command.toLowerCase().includes(searchInput.toLowerCase())
-    ) || commandss;
+    ) || commands;
 
   const handleSignOut = () => {
     const user = localStorage.getItem("userInfo");
@@ -95,59 +116,32 @@ const MainPage = () => {
   };
 
   const formatTextToHTML = (text) => {
-    let sentences = text.split(/[.\n]+/).filter(Boolean);
-    let formattedHTML = `<ul>${sentences
-      .map((sentence) => `<li>${sentence.trim()}</li>`)
-      .join("")}</ul>`;
+    let sentences = text
+      .trim()
+      .split(/[.\n]+/)
+      .filter(Boolean);
+    let formattedHTML = `${sentences
+      .map((sentence) => `<br/>${sentence.trim()}`)
+      .join("")}`;
     return formattedHTML;
   };
 
-  // const handleSendButton =() => {
-  //   handleResetMicData()
-  //   const chatInputData = text || transcript ;
-  //   setButtonsPopUp(true);
+  // const handleSendButton = () => {
+  //   const chatInputData = text ? formatTextToHTML(text) : transcript;
+
   //   if (userId && chatInputData.trim() !== "") {
   //     const chatRef = ref(database, `data${userId}`);
   //     set(chatRef, { chatInputData })
-  //       .then(() => {})
+  //       .then(() => {
+  //         console.log("Data sent to Firebase");
+  //       })
   //       .catch((error) => {
   //         console.error("Error adding data to Firebase: ", error);
   //       });
   //   }
-  //   SpeechRecognition.stopListening()
-  //   setTimeout(() => {
-  //     setButtonsPopUp(false);
-  //   }, 600);
+
+  //   SpeechRecognition.stopListening();
   // };
-
-  const handleSendButton = () => {
-    handleResetMicData();
-    let chatInputData = text || transcript;
-
-    // Function to check if string contains HTML tags
-    const containsHTML = (str) => /<\/?[a-z][\s\S]*>/i.test(str);
-
-    // If 'text' is plain, convert it into structured HTML
-    if (!containsHTML(text) && text) {
-      chatInputData = formatTextToHTML(text);
-    }
-
-    setButtonsPopUp(true);
-
-    if (userId && chatInputData.trim() !== "") {
-      const chatRef = ref(database, `data${userId}`);
-      set(chatRef, { chatInputData })
-        .then(() => {})
-        .catch((error) => {
-          console.error("Error adding data to Firebase: ", error);
-        });
-    }
-
-    SpeechRecognition.stopListening();
-    setTimeout(() => {
-      setButtonsPopUp(false);
-    }, 600);
-  };
 
   const handleResetButton = () => {
     const chatRef = ref(database, `data${userId}`);
@@ -155,28 +149,6 @@ const MainPage = () => {
       .then(() => {
         setText("");
         resetTranscript();
-      })
-      .catch((error) => {
-        console.error("Error adding data to Firebase: ", error);
-      });
-  };
-
-  const handleResetMicData = () => {
-    const chatRef = ref(database, `text${userId}`);
-    set(chatRef, { transcript: "" })
-      .then(() => {
-        resetTranscript();
-      })
-      .catch((error) => {
-        console.error("Error adding data to Firebase: ", error);
-      });
-  };
-
-  const handleResetTypeData = () => {
-    const chatRef = ref(database, `data${userId}`);
-    set(chatRef, { chatInputData: "" })
-      .then(() => {
-        setText("");
       })
       .catch((error) => {
         console.error("Error adding data to Firebase: ", error);
@@ -232,50 +204,75 @@ const MainPage = () => {
     setIsOpen(!isOpen);
   };
 
-  const saveTranscript = (trans) => {
-    saveTranscript(trans);
-    console.log(trans);
-  };
-
-  const handleStartButton = () => {
-    SpeechRecognition.startListening({
-      continuous: true,
-      language: "en-IN",
-    });
+  const handleStartListening = () => {
+    setText("");
+    resetTranscript();
+    SpeechRecognition.startListening({ continuous: true, language: "en-US" });
     setIsRecording(true);
   };
 
-  const handleStopButton = () => {
+  const handleStopListening = () => {
     SpeechRecognition.stopListening();
     setIsRecording(false);
   };
 
-  const handleStartListening = () => {
-    setText("");
-    resetTranscript(); // Clear previous transcript
-    handleResetTypeData();
-    SpeechRecognition.startListening({ continuous: true, language: "en-US" });
+  const handleTechChange = (tech) => {
+    setSelectedTech(tech);
+    setSearchInput("");
   };
 
   return (
     <div className="mainPageBackgroundContainer">
       <div className="mainPleftSectionContainer">
         <h1 className="CommandBoxHeading">Questions</h1>
-        <div class="search-container">
+        <div className="radioButtonsContainer">
+          <label className="radioLabel">
+            <input
+              type="radio"
+              name="technology"
+              value="react"
+              checked={selectedTech === "react"}
+              onChange={() => handleTechChange("react")}
+            />
+            <span>React</span>
+          </label>
+          <label className="radioLabel">
+            <input
+              type="radio"
+              name="technology"
+              value="dotnet"
+              checked={selectedTech === "dotnet"}
+              onChange={() => handleTechChange("dotnet")}
+            />
+            <span>.NET</span>
+          </label>
+          <label className="radioLabel">
+            <input
+              type="radio"
+              name="technology"
+              value="java"
+              checked={selectedTech === "java"}
+              onChange={() => handleTechChange("java")}
+            />
+            <span>Java</span>
+          </label>
+        </div>
+        <div className="search-container">
           <input
             type="search"
             placeholder="Search"
-            class="search-input"
+            className="search-input"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          <button type="button" class="search-button">
+          <button type="button" className="search-button">
             <BsSearch className="search-icon" />
           </button>
         </div>
         <div className="CommandsContainer" style={{ overflowY: "scroll" }}>
-          {filteredCommands?.map((item) => (
+          {filteredCommands?.map((item, index) => (
             <li
+              key={index}
               style={{ cursor: "pointer" }}
               onClick={() => handleCommand(item)}
             >
@@ -286,12 +283,8 @@ const MainPage = () => {
       </div>
       <div className="mainPrightSectionContainer">
         <div className="mainPrightSectionTopBar">
-          <h1 className="appTitle">Gallant</h1>
+          <h1 className="appTitle">Teaching Assistant</h1>
           <div className="mainPrightSectionTopBarInfo">
-            {/* <MdPerson className="logIcon" /> */}
-            {/* <h3 className="loginPName">{`${userName
-              ?.slice(0, 1)
-              .toUpperCase()}${userName?.slice(1)}`}</h3> */}
             <button onClick={handleSignOut} className="signoutButton">
               Sign Out
             </button>
@@ -307,7 +300,40 @@ const MainPage = () => {
               flexDirection: "column",
             }}
           >
-            <div class="search-container-mobile">
+            <div className="radioButtonsContainerMobile">
+              <label className="radioLabel">
+                <input
+                  type="radio"
+                  name="technology-mobile"
+                  value="react"
+                  checked={selectedTech === "react"}
+                  onChange={() => handleTechChange("react")}
+                />
+                <span>React</span>
+              </label>
+              <label className="radioLabel">
+                <input
+                  type="radio"
+                  name="technology-mobile"
+                  value="dotnet"
+                  checked={selectedTech === "dotnet"}
+                  onChange={() => handleTechChange("dotnet")}
+                />
+                <span>.NET</span>
+              </label>
+              <label className="radioLabel">
+                <input
+                  type="radio"
+                  name="technology-mobile"
+                  value="java"
+                  checked={selectedTech === "java"}
+                  onChange={() => handleTechChange("java")}
+                />
+                <span>Java</span>
+              </label>
+            </div>
+
+            <div className="search-container-mobile">
               <input
                 type="search"
                 placeholder="Search"
@@ -317,8 +343,9 @@ const MainPage = () => {
               />
             </div>
             <ul className="questions">
-              {filteredCommands?.map((item) => (
+              {filteredCommands?.map((item, index) => (
                 <li
+                  key={index}
                   style={{ cursor: "pointer" }}
                   onClick={() => handleCommand(item)}
                 >
@@ -327,12 +354,6 @@ const MainPage = () => {
               ))}
             </ul>
           </div>
-          {/* <textarea
-            placeholder="Mic"
-            type="text"
-            className="mainPtopInputContainer"
-            value={transcript}
-          /> */}
 
           <div className="btnTextContainer">
             {isRecording && (
@@ -340,33 +361,21 @@ const MainPage = () => {
                 Recording<span className="blink">...</span>
               </div>
             )}
-            {/* <div className="mainPbuttonsContainer">
-              <button
-                className="startButton button"
-                onClick={handleStartButton}
-              >
-                Start
-              </button>
-              <button className="stopButton button" onClick={handleStopButton}>
-                Stop
-              </button>
-              <button className="resetButton button" onClick={resetTranscript}>
-                Reset
-              </button>
-            </div> */}
           </div>
+
           <textarea
             value={text || transcript}
-            placeholder="Type or Speak..."
+            placeholder="Type or Speak... (Live typing updates automatically)"
             type="text"
             className="mainPbottomInputContainer"
             onChange={(e) => setText(e.target.value)}
           />
+
           <div className="mainPbuttonsContainer">
             {listening ? (
               <button
                 className="startButton button"
-                onClick={SpeechRecognition.stopListening}
+                onClick={handleStopListening}
               >
                 Stop Listening
               </button>
@@ -379,18 +388,14 @@ const MainPage = () => {
               </button>
             )}
 
-            <button
+            {/* <button
               id="sendButton"
               onClick={handleSendButton}
               className="stopButton button"
             >
-              Send
-            </button>
-            {buttonsPopUp && (
-              <div className="popup" id="popup">
-                Chat Sent !
-              </div>
-            )}
+              Send Voice
+            </button> */}
+
             <button onClick={handleResetButton} className="resetButton button">
               Reset
             </button>

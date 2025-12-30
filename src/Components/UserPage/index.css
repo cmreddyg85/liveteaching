@@ -31,12 +31,12 @@
 
 
 .rightSectionContainer{
-    width:35%;
-    padding:10px;
+    width:40%;
+    /* padding:10px;
     border:1px solid black;
     height:250px;
     overflow-y:auto;
-    font-size:20px;
+    font-size:20px; */
     
     
 }
@@ -49,7 +49,7 @@
 @media screen and (max-width:362px){
     .rightSectionContainer{
         width:80%;
-        height:400px;
+        /* height:400px; */
     }
 }
 
@@ -170,3 +170,8 @@
 .mobileuserPageUserInfo{
     font-size:15px;
 }
+
+ol {
+      
+      margin: 0px;
+    }

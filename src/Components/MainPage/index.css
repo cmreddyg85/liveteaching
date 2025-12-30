@@ -591,3 +591,38 @@ details {
     display: none !important;
   }
 }
+
+.radioButtonsContainer {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.radioButtonsContainerMobile {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  flex-wrap: wrap;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.radioLabel input[type="radio"] {
+  cursor: pointer;
+}
+
+.radioLabel span {
+  font-weight: 500;
+}

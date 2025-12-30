@@ -193,18 +193,13 @@ let res = arr.reduce((acc, curr) => acc + curr, 0);
     command: "Arrow vs Normal function",
     text: `
 <p><strong>Arrow Functions:</strong></p>
-          
             <li>Arrow functions have a shorter and more concise syntax compared to normal functions.</li>
             <li>Arrow functions do not have their own 'this' context, inherit the 'this' value from the surrounding lexical scope.</li>
              <li>Arrow functions do not have their own 'arguments' object.</li>
-          
-      
           <p><strong>Normal Functions:</strong></p>
-       
             <li>Normal functions are defined using the 'function' keyword followed by a function name and a block of code.</li>
             <li>Normal functions have their own 'this' context, which is determined by how they are called.</li>
             <li>Normal functions have argument object,which contains the args passed to function</li>
-         
         `,
   },
   {
@@ -286,15 +281,14 @@ let res = arr.reduce((acc, curr) => acc + curr, 0);
       `,
   },
   {
-    command:"Uses Cases of Event bubbling and event capturing",
-    text :`
+    command: "Uses Cases of Event bubbling and event capturing",
+    text: `
     <p><strong>Use Case Event Bubbling:</strong></p>
      <li>Simplifying event management by attaching event handlers to common parent elements instead of individual elements.</li>
     <p><strong>Use CaseEvent Capturing:</strong></p>
     <li>Implementing  event handling logic that requires capturing events before they bubble up.</li>
     
-     `
-
+     `,
   },
   {
     command: "Undefined and null difference",
@@ -314,10 +308,10 @@ let res = arr.reduce((acc, curr) => acc + curr, 0);
          `,
   },
   {
-    command:"Benefits of closure",
-    text:`
+    command: "Benefits of closure",
+    text: `
       <li>It helps to encapsulate the data , and provides data privacy by creating the private variables that cant be accessed from outside.</li>
-    `
+    `,
   },
   {
     command: "Syncronous and Asyncronous Javascript ",
@@ -517,14 +511,13 @@ In class components, React provides React.PureComponent, in functional component
           `,
   },
   {
-    command:"When to use Pure Component",
-    text : `
+    command: "When to use Pure Component",
+    text: `
      
           <ul>
             <li>They are particularly useful in scenarios where a component frequently re-renders with the same props and state, and you want to avoid unnecessary re-renders.</li>
           </ul>
-    `
-
+    `,
   },
   {
     command: "Controlled and UnControlled Components",
@@ -632,8 +625,8 @@ In class components, React provides React.PureComponent, in functional component
         `,
   },
   {
-    command:"UseMemo vs React.Memo",
-    text : `
+    command: "UseMemo vs React.Memo",
+    text: `
      <p><strong>useMemo vs React.memo:</strong></p>
      <p>Both useMemo,React.memo is used to improve the performace of application:-</p>
 
@@ -652,7 +645,7 @@ In class components, React provides React.PureComponent, in functional component
           </ul>
                     
 
-    `
+    `,
   },
 
   {
@@ -731,11 +724,11 @@ In class components, React provides React.PureComponent, in functional component
           `,
   },
   {
-    command:"When to use Higher Order Components",
-    text :`
+    command: "When to use Higher Order Components",
+    text: `
        <li>Uses in situation like reusing the logic across multiple components - e.g authentication.</li>
  <li>Enhancing component functionality without modifying the original component.</li>
-    `
+    `,
   },
   {
     command: "Routing",
@@ -747,14 +740,14 @@ In class components, React provides React.PureComponent, in functional component
           `,
   },
   {
-    command:"Features of React Router",
-    text:`
+    command: "Features of React Router",
+    text: `
     <p><strong>React Router Key Features</strong></p>
   <li> <strong> Client-side Routing</strong>: No full-page reload, only components update.</li>
    <li> <strong> Dynamic Routing</strong>: Define routes dynamically using JavaScript.</li>
    <li> <strong> Route Parameters & Query Strings</strong>: Pass data through URLs.</li>
    <li> <strong> Navigation</strong>: useNavigate, Link, and NavLink for seamless transitions.</li>
-    `
+    `,
   },
   {
     command: "Synthetic Events",
@@ -859,16 +852,17 @@ In class components, React provides React.PureComponent, in functional component
             <li>Response interceptors can be added using the <code>axios.interceptors.response.use()</code> method.</li>
           </ul>
         `,
-  },{
-    command:"Use Cases of Axios Interceptors",
-    text :`
+  },
+  {
+    command: "Use Cases of Axios Interceptors",
+    text: `
      <p><strong>Use Cases:</strong></p>
           <ul>
             <li><strong>Error Handling:</strong> Intercepting error responses and performing error handling logic.</li>
             <li><strong>Authentication:</strong> Adding authentication headers to requests before they are sent.</li>
             <li><strong>Logging:</strong> Logging request and response data for debugging purposes.</li>
           </ul>
-    `
+    `,
   },
   {
     command: "Redux Toolkit",
@@ -894,9 +888,10 @@ In class components, React provides React.PureComponent, in functional component
             <li><strong>Fulfilled:</strong>Means operation completed successfully.</li>
             <li><strong>Rejected:</strong> when an operation failed.</li>
           </ul>`,
-  },{
-    command:"Promise Methods",
-    text : `
+  },
+  {
+    command: "Promise Methods",
+    text: `
           
           <p><strong>Promise Methods:</strong></p>
           <ul>
@@ -907,7 +902,7 @@ In class components, React provides React.PureComponent, in functional component
             <li><strong>Promise.allSettled():</strong>It takes an array of promises, and wait for all promises to settle either they reject or resolved it wait for all promises to settled. </li>
             <li><strong>Promise.any():</strong>It takes an array of promises,it return the first resolved promises ,ignore the reject promises </li>
           </ul>
-    `
+    `,
   },
   {
     command: "Async/Await",
@@ -1035,8 +1030,8 @@ In class components, React provides React.PureComponent, in functional component
       `,
   },
   {
-    command:"Features of SCSS",
-    text :` 
+    command: "Features of SCSS",
+    text: ` 
       <p><strong>Features of SCSS:</strong></p>
           <ol>
             <li><strong>Variables:</strong> Variables in SCSS help store colors, font sizes, margins, for reuse throughout the stylesheet.</li>
@@ -1044,7 +1039,7 @@ In class components, React provides React.PureComponent, in functional component
             <li><strong>Mixins:</strong> Mixins help create reusable styles that can be applied to multiple elements.</li>
             <li><strong>Inheritance:</strong> SCSS supports inheritance, allowing you to extend styles from one selector to another.</li>
           </ol>
-    `
+    `,
   },
   {
     command: "Ways to add styling in react",
@@ -1086,11 +1081,12 @@ In class components, React provides React.PureComponent, in functional component
     text: ` 
        <p>Webpack is a module bundler for JavaScript applications. It takes all the different files JavaScript, CSS, images, processes them, and bundles them into a single optimized file for efficient loading in the browser.</p>
           `,
-  },{
-    command:"Can you explain why Webpack is needed?",
-    text:`
+  },
+  {
+    command: "Can you explain why Webpack is needed?",
+    text: `
     <p>In applications have multiple files and dependencies. If the browser had to fetch each file separately, it would increase load times and reduce performance.</p>
-    `
+    `,
   },
   {
     command: "configure webpack",
@@ -1369,13 +1365,14 @@ In class components, React provides React.PureComponent, in functional component
             <li>We will write polyfills when an modern features are not supported in older browsers, it bring stability across devices.</li>
           </ul>
       `,
-  },{
-    "command": "How to Implement Polyfills?",
-    "text": `
+  },
+  {
+    command: "How to Implement Polyfills?",
+    text: `
       <li>By using polyfill libraries like <code>core-js</code>, we can automatically add polyfills for missing features.</li>
       <li>If a browser does not support a feature, we can manually create a polyfill using JavaScript.</li>
-    `
-},
+    `,
+  },
   {
     command: "Treeshaking",
     text: ` <p><strong>Tree Shaking:</strong></p>
@@ -1386,28 +1383,28 @@ In class components, React provides React.PureComponent, in functional component
           </ul>
       `,
   },
-   {
-    command:"How Tree Shaking Works?",
-    text : `
+  {
+    command: "How Tree Shaking Works?",
+    text: `
      <p><strong>How Tree Shaking Works:</strong></p>
           <ol>
             <li>Tree shaking tools statically analyze the codebase to determine the dependencies between modules.</li>
             <li>Unused code is marked as dead code during the analysis phase.</li>
             <li>During the bundling process, dead code is eliminated from the final bundle, resulting in a smaller package size.</li>
           </ol>
-    `
-   },
-   {
-     command:"Benefits of Tree Shaking",
-       text:`
+    `,
+  },
+  {
+    command: "Benefits of Tree Shaking",
+    text: `
         <p><strong>Benefits of Tree Shaking:</strong></p>
           <ul>
             <li><strong>Reduced Bundle Size:</strong> Eliminating dead code reduces the size of the bundle, resulting in faster load times and improved performance.</li>
             <li><strong>Improved Efficiency:</strong> Developers can focus on writing expressive code without worrying about unnecessary dependencies affecting the final bundle size.</li>
             <li><strong>Better User Experience:</strong> Smaller bundle sizes lead to faster page load times, which contributes to a better user experience.</li>
           </ul>
-       `
-   },
+       `,
+  },
   {
     command: "Object.freeze()",
     text: ` <p><strong>Object.freeze():</strong></p>
@@ -1432,12 +1429,12 @@ In class components, React provides React.PureComponent, in functional component
       
       `,
   },
-   {
-     command:"How Throttling works?",
-     text : `
+  {
+    command: "How Throttling works?",
+    text: `
           <p>When throttling a function,the first time it's called, it runs immediately. After that, if it's called again before a set time has passed, it gets ignored. Once the time is up, it can run again.</p>
-     `
-   },
+     `,
+  },
   {
     command: "CORS",
     text: ` <p><strong>CORS (Cross-Origin Resource Sharing):</strong></p>
@@ -1730,14 +1727,15 @@ insertionSort(arr);
           </code>
     </pre>
 `,
-  },{
-    command:"Loose and Strict Equal?",
-    text:`<p><strong>Loose Equal (==):</strong> It compares only values. If the values are of different types, it converts one type to match the other before comparing.</p>  
+  },
+  {
+    command: "Loose and Strict Equal?",
+    text: `<p><strong>Loose Equal (==):</strong> It compares only values. If the values are of different types, it converts one type to match the other before comparing.</p>  
 <p><strong>Strict Equal (===):</strong> It compares both values and types. It returns false if both types are different and does not perform type conversion.</p>
 
     
-    `
-  }
+    `,
+  },
 ];
 
 export default commandss;

@@ -42,13 +42,13 @@
 }
 @media screen and (max-width:768px) {
     .rightSectionContainer{
-        width:60%;
+        width:100%;
     }
     
 }
 @media screen and (max-width:362px){
     .rightSectionContainer{
-        width:80%;
+        width:100%;
         /* height:400px; */
     }
 }

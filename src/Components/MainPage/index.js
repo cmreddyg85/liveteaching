@@ -11,6 +11,8 @@ import SpeechRecognition, {
 import reactData from "../../react-data";
 import dotnetData from "../../dotnet-data";
 import javaData from "../../java-data";
+import hrData from "../../hr-data";
+import azureData from "../../azure-data";
 
 const MainPage = () => {
   const userId = localStorage.getItem("userInfo");
@@ -100,6 +102,10 @@ const MainPage = () => {
       ? reactData
       : selectedTech === "dotnet"
       ? dotnetData
+      : selectedTech === "hr"
+      ? hrData
+      : selectedTech === "azure"
+      ? azureData
       : javaData;
 
   const filteredCommands =
@@ -256,6 +262,26 @@ const MainPage = () => {
             />
             <span>Java</span>
           </label>
+          <label className="radioLabel">
+            <input
+              type="radio"
+              name="technology"
+              value="azure"
+              checked={selectedTech === "azure"}
+              onChange={() => handleTechChange("azure")}
+            />
+            <span>SQL/Azure</span>
+          </label>
+          <label className="radioLabel">
+            <input
+              type="radio"
+              name="technology"
+              value="hr"
+              checked={selectedTech === "hr"}
+              onChange={() => handleTechChange("hr")}
+            />
+            <span>HR/Manager</span>
+          </label>
         </div>
         <div className="search-container">
           <input
@@ -330,6 +356,26 @@ const MainPage = () => {
                   onChange={() => handleTechChange("java")}
                 />
                 <span>Java</span>
+              </label>
+              <label className="radioLabel">
+                <input
+                  type="radio"
+                  name="technology-mobile"
+                  value="azure"
+                  checked={selectedTech === "azure"}
+                  onChange={() => handleTechChange("azure")}
+                />
+                <span>SQL/Azure</span>
+              </label>
+              <label className="radioLabel">
+                <input
+                  type="radio"
+                  name="technology-mobile"
+                  value="hr"
+                  checked={selectedTech === "hr"}
+                  onChange={() => handleTechChange("hr")}
+                />
+                <span>HR/Manager</span>
               </label>
             </div>
 

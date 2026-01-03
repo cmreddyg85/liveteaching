@@ -13,5 +13,5 @@ const commandss = [
           <p> I'm always eager to stay updated with the latest trends and best practices in front-end development to deliver the best possible solutions.</p>
           
        `,
-  },
+  }
   ]

@@ -15,3 +15,5 @@ const commandss = [
        `,
   }
   ]
+
+export default commandss;

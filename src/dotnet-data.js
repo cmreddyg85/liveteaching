@@ -575,3 +575,6 @@ using tenant IDs or separate databases.
     `,
   },
 ];
+
+
+export default commandss;

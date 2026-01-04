@@ -3,454 +3,305 @@ const commandss = [
   {
     command: ".net",
     text: `
-.NET is a development platform for building web, desktop, mobile,
-cloud, and gaming applications. It supports multiple languages
-like C#, F#, and VB.NET and runs on the Common Language Runtime.
+.NET is a cross-platform development platform used to build
+web, desktop, mobile, cloud, and gaming applications.
+It supports languages like C#, F#, and VB.NET.
+.NET applications run on the Common Language Runtime (CLR),
+which provides memory management, security,
+exception handling, and garbage collection.
     `,
   },
 
   {
-    command: "clr",
+    command: ".clr",
     text: `
-CLR stands for Common Language Runtime.
-It manages memory, garbage collection, security,
-exception handling, and JIT compilation.
+CLR (Common Language Runtime) is the execution engine of .NET.
+It converts Intermediate Language (IL) into native code
+using the Just-In-Time (JIT) compiler.
+CLR manages memory allocation, garbage collection,
+exception handling, security, and thread management.
     `,
   },
 
   {
-    command: "managed vs unmanaged code",
+    command: ".cts",
+    text: `
+CTS (Common Type System) defines how data types are declared
+and used across all .NET languages.
+It ensures type safety and consistency between languages.
+Objects created in one language can be used in another
+without compatibility issues.
+    `,
+  },
+
+  {
+    command: ".cls",
+    text: `
+CLS (Common Language Specification) is a set of rules
+that .NET languages must follow.
+It ensures cross-language interoperability.
+Code that follows CLS rules can be consumed
+by any CLS-compliant .NET language.
+    `,
+  },
+
+  {
+    command: ".dotnetversions",
+    text: `
+.NET Framework is Windows-only and mostly legacy.
+.NET Core introduced cross-platform support and better performance.
+.NET 5 and above unified the platform into a single .NET.
+Modern .NET supports cloud-native apps, microservices,
+containers, and high-performance applications.
+    `,
+  },
+
+  {
+    command: ".managed-vs-unmanaged",
     text: `
 Managed code runs under CLR control and benefits from
-automatic memory management.
+automatic memory management and garbage collection.
 Unmanaged code runs directly on the OS and requires
-manual memory handling.
+manual memory handling, such as C or C++ code.
     `,
   },
 
   {
-    command: "c# program structure",
+    command: ".struct-vs-class",
     text: `
-A C# program consists of using statements, namespace,
-class definition, and a Main method
-which acts as the entry point.
+Structs are value types and stored on the stack or inline.
+Classes are reference types stored on the heap.
+Structs are faster for small immutable data.
+Classes support inheritance, polymorphism, and extensibility.
+Choose based on size, mutability, and behavior.
     `,
   },
 
   {
-    command: "value types vs reference types",
+    command: ".abstract-vs-interface",
     text: `
-Value types store data directly and are allocated on the stack.
-Reference types store references to data allocated on the heap.
-    `,
-  },
-
-  {
-    command: "garbage collection",
-    text: `
-Garbage Collection automatically frees memory
-used by unreachable objects.
-It works using generations to improve performance.
-    `,
-  },
-
-  {
-    command: "exception handling",
-    text: `
-Exception handling uses try, catch, and finally blocks
-to handle runtime errors gracefully.
-    `,
-  },
-
-  {
-    command: "types of classes",
-    text: `
-C# supports static, abstract, sealed, partial,
-and generic classes for different use cases.
-    `,
-  },
-
-  {
-    command: "namespace",
-    text: `
-Namespaces organize code and prevent naming conflicts
-by grouping related classes and interfaces.
-    `,
-  },
-
-  {
-    command: "encapsulation",
-    text: `
-Encapsulation hides internal data and exposes
-only required functionality using access modifiers.
-    `,
-  },
-
-  {
-    command: "polymorphism",
-    text: `
-Polymorphism allows methods to behave differently
-based on object type using overloading and overriding.
-    `,
-  },
-
-  {
-    command: "delegates",
-    text: `
-Delegates are type-safe references to methods.
-They are used for callbacks and event handling.
-    `,
-  },
-
-  {
-    command: "linq",
-    text: `
-LINQ provides a unified way to query collections,
-databases, and XML using C# syntax.
-    `,
-  },
-
-  {
-    command: "abstract class vs interface",
-    text: `
-Abstract classes can have implementations
-and support inheritance.
+Abstract classes can have fields, constructors,
+and method implementations.
 Interfaces define contracts and support multiple inheritance.
+From C# 8 onwards, interfaces support default methods.
+Use interfaces for loose coupling and abstraction.
     `,
   },
 
   {
-    command: "memory management",
+    command: ".records",
     text: `
-Memory is managed automatically using garbage collection.
-Unmanaged resources are released using IDisposable
-and using statements.
+Records are immutable reference types introduced in C# 9.
+They provide value-based equality by default.
+Records are ideal for DTOs and API models.
+They reduce boilerplate code and support with-expressions.
     `,
   },
 
   {
-    command: "threading",
+    command: ".garbagecollection",
     text: `
-Threading allows multiple operations to run concurrently.
-It is implemented using Thread, ThreadPool, and Tasks.
+Garbage Collection automatically reclaims unused memory.
+It uses a generational model for optimization.
+Gen 0 holds short-lived objects.
+Gen 1 and Gen 2 hold long-lived objects.
+This improves application performance and memory usage.
     `,
   },
 
   {
-    command: "async await",
+    command: ".loh",
     text: `
-Async and await enable non-blocking asynchronous programming
-and improve application responsiveness.
+Large Object Heap (LOH) stores objects larger than 85 KB.
+LOH is not compacted frequently, which may cause fragmentation.
+Large arrays often end up in LOH.
+Object pooling helps reduce LOH memory pressure.
     `,
   },
 
   {
-    command: "entity framework",
+    command: ".dispose-vs-finalize",
     text: `
-Entity Framework is an ORM that allows database access
-using .NET objects instead of SQL queries.
+Dispose explicitly releases unmanaged resources.
+Finalize is called automatically by the GC.
+Dispose is deterministic and recommended.
+Finalize timing is unpredictable and expensive.
+Using blocks ensure proper resource cleanup.
     `,
   },
 
   {
-    command: "extension methods",
+    command: ".dependencyinjection",
     text: `
-Extension methods add new functionality
-to existing types without modifying them.
+Dependency Injection removes tight coupling between components.
+Dependencies are provided rather than created internally.
+It improves testability and maintainability.
+ASP.NET Core has built-in DI support.
+Constructor injection is the recommended approach.
     `,
   },
 
   {
-    command: "task exception handling",
+    command: ".servicelifetimes",
     text: `
-Exceptions in async methods are handled using try-catch
-while awaiting tasks or inside async methods.
+Singleton creates one instance for the entire application.
+Scoped creates one instance per HTTP request.
+Transient creates a new instance every time.
+Incorrect lifetime usage can cause memory leaks.
+Never inject scoped services into singletons.
     `,
   },
 
   {
-    command: "reflection",
+    command: ".middleware",
     text: `
-Reflection allows runtime inspection of assemblies,
-types, methods, and attributes.
+Middleware components handle HTTP requests and responses.
+Each middleware can inspect or modify the request.
+Execution order in the pipeline is very important.
+Authentication must run before authorization.
+Incorrect ordering can break application behavior.
     `,
   },
 
   {
-    command: "middleware",
+    command: ".use-run-map",
     text: `
-Middleware components form the HTTP request pipeline
-and process requests and responses sequentially.
+Use adds middleware and continues the pipeline.
+Run terminates the pipeline and handles the response.
+Map branches the pipeline based on request path.
+Use is the most commonly used method.
+Wrong ordering can block downstream middleware.
     `,
   },
 
   {
-    command: "dependency injection",
+    command: ".ienumerable-vs-iqueryable",
     text: `
-Dependency Injection promotes loose coupling
-by providing dependencies through constructors.
+IEnumerable executes queries in memory.
+IQueryable executes queries at the database level.
+IQueryable is suitable for large datasets.
+IEnumerable is better for small in-memory collections.
+Choosing incorrectly can severely impact performance.
     `,
   },
 
   {
-    command: ".net standard",
+    command: ".async-await",
     text: `
-.NET Standard defines a common API set
-supported across all .NET platforms.
+Async and await enable non-blocking asynchronous execution.
+They improve scalability and responsiveness.
+Async methods use compiler-generated state machines.
+Avoid Task.Result and Task.Wait to prevent deadlocks.
+Always await async calls properly.
     `,
   },
 
   {
-    command: ".net core vs framework vs xamarin",
+    command: ".deadlock",
     text: `
-.NET Framework is Windows-only,
-.NET Core is cross-platform,
-Xamarin is used for mobile development.
+Deadlocks occur when threads wait indefinitely for resources.
+Using Task.Result or Wait can cause deadlocks.
+ASP.NET synchronization context increases the risk.
+Use async-await consistently end-to-end.
+Avoid blocking asynchronous code.
     `,
   },
 
   {
-    command: "garbage collection optimization",
+    command: ".entityframework",
     text: `
-GC can be optimized by minimizing allocations,
-disposing unmanaged resources,
-and avoiding large object heap misuse.
+Entity Framework is an ORM for database access.
+It allows developers to work with data using .NET objects.
+It supports LINQ queries and change tracking.
+EF reduces boilerplate SQL code.
     `,
   },
 
   {
-    command: "attributes",
+    command: ".ef-tracking",
     text: `
-Attributes add metadata to code
-and are used for validation, serialization,
-and behavior control.
+Tracking queries monitor entity state changes.
+AsNoTracking improves performance for read-only queries.
+Tracking consumes more memory.
+Use tracking when updates are required.
+Use no-tracking for read-heavy scenarios.
     `,
   },
 
   {
-    command: "code compilation",
+    command: ".nplusone",
     text: `
-Source code is compiled to Intermediate Language,
-then JIT compiled to native code at runtime.
+N+1 problem occurs due to lazy loading.
+It results in excessive database queries.
+Performance degrades with large datasets.
+Use Include, projections, or eager loading to fix it.
+Always analyze generated SQL queries.
     `,
   },
 
   {
-    command: "gac",
+    command: ".microservices",
     text: `
-Global Assembly Cache stores shared strong-named assemblies
-used by multiple applications.
+Microservices are independently deployable services.
+Each service owns its own database.
+Services communicate via HTTP or messaging.
+They improve scalability and fault isolation.
+Monitoring and observability are critical.
     `,
   },
 
   {
-    command: "asp.net core security",
+    command: ".circuitbreaker",
     text: `
-Security is implemented using authentication,
-authorization, HTTPS, and input validation.
+Circuit Breaker prevents cascading service failures.
+It stops calls to failing services temporarily.
+Allows dependent systems to recover gracefully.
+Polly is commonly used in .NET for resilience.
+Retry and fallback policies improve stability.
     `,
   },
 
   {
-    command: "mvc",
+    command: ".jwt",
     text: `
-MVC separates application into Model,
-View, and Controller layers.
+JWT is a stateless authentication mechanism.
+It consists of header, payload, and signature.
+Token is issued after successful authentication.
+Client sends token in Authorization header.
+JWT improves scalability of distributed systems.
     `,
   },
 
   {
-    command: "razor pages vs mvc",
+    command: ".designpatterns",
     text: `
-Razor Pages are page-focused,
-MVC is controller-based and suitable
-for large applications.
+Design patterns solve recurring design problems.
+Common .NET patterns include Singleton and Factory.
+Repository abstracts data access logic.
+Strategy enables dynamic behavior selection.
+CQRS separates read and write responsibilities.
     `,
   },
 
-  {
-    command: "validation",
-    text: `
-Validation is done using data annotations
-or fluent validation libraries.
-    `,
-  },
-
-  {
-    command: "signalr",
-    text: `
-SignalR enables real-time communication
-using WebSockets.
-    `,
-  },
-
-  {
-    command: "blazor",
-    text: `
-Blazor allows building web apps using C#
-instead of JavaScript.
-    `,
-  },
-
-  {
-    command: "api versioning",
-    text: `
-API versioning ensures backward compatibility
-of web APIs.
-    `,
-  },
-
-  {
-    command: "iapplciationbuilder",
-    text: `
-IApplicationBuilder is used to configure
-the middleware pipeline.
-    `,
-  },
-
-  {
-    command: "areas",
-    text: `
-Areas help organize large MVC applications
-by grouping related features.
-    `,
-  },
-
-  {
-    command: "session management",
-    text: `
-Session state stores user-specific data
-across multiple requests.
-    `,
-  },
-
-  {
-    command: "caching",
-    text: `
-Caching improves performance by storing
-frequently accessed data.
-    `,
-  },
-
-  {
-    command: "unit testing",
-    text: `
-Unit testing validates individual components
-in isolation.
-    `,
-  },
-
-  {
-    command: "mocking",
-    text: `
-Mocking simulates dependencies
-to test components independently.
-    `,
-  },
-
-  {
-    command: "solid principles",
-    text: `
-SOLID principles improve maintainability
-and scalability of code.
-    `,
-  },
-
-  {
-    command: "ci cd",
-    text: `
-CI/CD automates build, test,
-and deployment pipelines.
-    `,
-  },
-
-  {
-    command: "secure c# code",
-    text: `
-Security includes parameterized queries,
-input validation, HTTPS, and encryption.
-    `,
-  },
-
-  {
-    command: "performance issues",
-    text: `
-Performance issues are addressed using caching,
-indexing, memory optimization, and profiling.
-    `,
-  },
-
-  {
-    command: "repository pattern",
-    text: `
-Repository pattern abstracts data access
-and improves testability.
-    `,
-  },
-
-  {
-    command: "ef migrations",
-    text: `
-Migrations manage database schema changes
-without data loss.
-    `,
-  },
-
-  {
-    command: "debugging tools",
-    text: `
-Debugging tools include Visual Studio debugger,
-profilers, and memory analyzers.
-    `,
-  },
-
-  {
-    command: "stay updated",
-    text: `
-Stay updated by following blogs,
-communities, conferences, and documentation.
-    `,
-  },
-
-  /* SQL */
+  /* ================= SQL ================= */
 
   {
     command: "sql joins",
     text: `
-Joins combine rows from multiple tables
-using INNER, LEFT, RIGHT, and FULL joins.
-    `,
-  },
-
-  {
-    command: "primary key vs unique key",
-    text: `
-Primary key uniquely identifies records.
-Unique key enforces uniqueness but allows NULLs.
-    `,
-  },
-
-  {
-    command: "foreign key",
-    text: `
-Foreign keys enforce referential integrity
-between related tables.
-    `,
-  },
-
-  {
-    command: "normalization",
-    text: `
-Normalization reduces data redundancy
-using normal forms like 1NF, 2NF, and 3NF.
+Joins combine rows from multiple tables.
+Types include INNER, LEFT, RIGHT, and FULL joins.
+They are used to fetch related data.
+Correct join selection impacts performance.
     `,
   },
 
   {
     command: "clustered vs nonclustered index",
     text: `
-Clustered index defines physical order.
+Clustered index defines physical data order.
 Non-clustered index stores pointers to data.
+Only one clustered index per table is allowed.
+Indexes improve read performance but slow writes.
     `,
   },
 
@@ -459,122 +310,40 @@ Non-clustered index stores pointers to data.
     text: `
 Transactions ensure Atomicity, Consistency,
 Isolation, and Durability.
+They guarantee reliable data operations.
+ACID properties are critical in banking systems.
     `,
   },
 
   {
     command: "delete vs truncate vs drop",
     text: `
-DELETE removes rows,
-TRUNCATE removes all rows,
-DROP removes the table.
-    `,
-  },
-
-  {
-    command: "window functions",
-    text: `
-Window functions perform calculations
-across related rows.
+DELETE removes selected rows and can be rolled back.
+TRUNCATE removes all rows and is faster.
+DROP removes the table structure completely.
     `,
   },
 
   {
     command: "cte",
     text: `
-CTE improves readability and reusability
-of complex queries.
-    `,
-  },
-
-  {
-    command: "stored procedures",
-    text: `
-Stored procedures encapsulate SQL logic
-and improve security and performance.
+CTE (Common Table Expression) improves query readability.
+It simplifies complex queries.
+CTEs can be recursive.
+They improve maintainability of SQL code.
     `,
   },
 
   {
     command: "sql injection",
     text: `
-SQL injection is prevented using
-parameterized queries.
+SQL Injection is a security vulnerability.
+It allows attackers to manipulate queries.
+Prevent it using parameterized queries.
+Never concatenate user input directly into SQL.
     `,
   },
 
-  {
-    command: "exists vs in",
-    text: `
-EXISTS checks existence,
-IN compares values in a list.
-    `,
-  },
-
-  {
-    command: "indexing",
-    text: `
-Indexes improve query performance
-but slow down write operations.
-    `,
-  },
-
-  {
-    command: "explain plan",
-    text: `
-Query plan shows how SQL executes queries
-and helps identify bottlenecks.
-    `,
-  },
-
-  {
-    command: "group by having",
-    text: `
-GROUP BY groups rows,
-HAVING filters aggregated results.
-    `,
-  },
-
-  {
-    command: "composite key",
-    text: `
-Composite key uses multiple columns
-to uniquely identify a row.
-    `,
-  },
-
-  {
-    command: "materialized view",
-    text: `
-Materialized views store query results
-physically for faster access.
-    `,
-  },
-
-  {
-    command: "null handling",
-    text: `
-NULLs are handled using IS NULL,
-COALESCE, and constraints.
-    `,
-  },
-
-  {
-    command: "scalar vs table functions",
-    text: `
-Scalar functions return single values,
-table functions return result sets.
-    `,
-  },
-
-  {
-    command: "multi tenant schema",
-    text: `
-Multi-tenant schemas isolate data
-using tenant IDs or separate databases.
-    `,
-  },
 ];
-
 
 export default commandss;

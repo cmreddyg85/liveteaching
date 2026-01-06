@@ -13,6 +13,9 @@ import dotnetData from "../../dotnet-data";
 import javaData from "../../java-data";
 import hrData from "../../hr-data";
 import azureData from "../../azure-data";
+import angularData from "../../angular-data";
+import awsData from "../../aws-data";
+import servicenowData from "../../servicenow-data";
 
 const MainPage = () => {
   const userId = localStorage.getItem("userInfo");
@@ -136,7 +139,15 @@ const MainPage = () => {
       ? hrData
       : selectedTech === "azure"
       ? azureData
-      : javaData;
+      : selectedTech === "aws"
+      ? awsData
+      : selectedTech === "java"
+      ? javaData
+      : selectedTech === "angular"
+      ? angularData
+      : selectedTech === "servicenow"
+      ? servicenowData
+      : [];
 
   const filteredCommands =
     commands?.filter((command) =>
@@ -312,6 +323,36 @@ const MainPage = () => {
               onChange={() => handleTechChange("azure")}
             />
             <span>SQL/Azure</span>
+          </label>
+          <label className="radioLabel">
+            <input
+              type="radio"
+              name="technology"
+              value="angular"
+              checked={selectedTech === "angular"}
+              onChange={() => handleTechChange("angular")}
+            />
+            <span>Angular</span>
+          </label>
+          <label className="radioLabel">
+            <input
+              type="radio"
+              name="technology"
+              value="aws"
+              checked={selectedTech === "aws"}
+              onChange={() => handleTechChange("aws")}
+            />
+            <span>Aws</span>
+          </label>
+          <label className="radioLabel">
+            <input
+              type="radio"
+              name="technology"
+              value="servicenow"
+              checked={selectedTech === "servicenow"}
+              onChange={() => handleTechChange("servicenow")}
+            />
+            <span>Servicenow</span>
           </label>
           <label className="radioLabel">
             <input

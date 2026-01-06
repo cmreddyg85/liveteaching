@@ -2,7 +2,7 @@
 
 const commandss = [
   {
-    command: "hr?",
+    command: "servicenow?",
     text: `
       <p>Spring Boot is a framework built on top of Spring that simplifies application development.</p>
       <li>Provides auto-configuration.</li>

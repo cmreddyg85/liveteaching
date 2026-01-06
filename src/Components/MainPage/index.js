@@ -25,10 +25,12 @@ const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [text, setText] = useState("");
+  const [intText, setIntText] = useState("");
   const [selectedTech, setSelectedTech] = useState("react");
 
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const textDebounceRef = useRef(null);
+  const intrTextDebounceRef = useRef(null);
 
   useEffect(() => {
     const userId = localStorage.getItem("userInfo");
@@ -97,6 +99,34 @@ const MainPage = () => {
     };
   }, [text, transcript, userId]);
 
+  useEffect(() => {
+    if (userId && intText) {
+      // Clear previous timeout
+      if (intrTextDebounceRef.current) {
+        clearTimeout(intrTextDebounceRef.current);
+      }
+
+      // Debounce the Firebase update (wait 500ms after user stops typing)
+      intrTextDebounceRef.current = setTimeout(() => {
+        const chatInputData = formatTextToHTML(intText);
+        const chatRef = ref(database, `instructor${userId}`);
+        set(chatRef, { chatInputData })
+          .then(() => {
+            console.log("Live update sent to Firebase");
+          })
+          .catch((error) => {
+            console.error("Error adding data to Firebase: ", error);
+          });
+      }, 500);
+    }
+
+    return () => {
+      if (intrTextDebounceRef.current) {
+        clearTimeout(intrTextDebounceRef.current);
+      }
+    };
+  }, [intText, userId]);
+
   const commands =
     selectedTech === "react"
       ? reactData
@@ -155,6 +185,17 @@ const MainPage = () => {
       .then(() => {
         setText("");
         resetTranscript();
+      })
+      .catch((error) => {
+        console.error("Error adding data to Firebase: ", error);
+      });
+  };
+
+  const handleIntrResetButton = () => {
+    const chatRef = ref(database, `instructor${userId}`);
+    set(chatRef, { chatInputData: "" })
+      .then(() => {
+        setIntText("");
       })
       .catch((error) => {
         console.error("Error adding data to Firebase: ", error);
@@ -446,7 +487,27 @@ const MainPage = () => {
               Reset
             </button>
           </div>
+          <br />
+          <br />
+          <h1>Live Instructions to Candidate</h1>
+          <textarea
+            value={intText}
+            placeholder="Type here"
+            type="text"
+            className="mainInstructionsInputContainer"
+            onChange={(e) => setIntText(e.target.value)}
+          />
+
+          <div className="mainPbuttonsContainer">
+            <button
+              onClick={handleIntrResetButton}
+              className="resetButton button"
+            >
+              Reset
+            </button>
+          </div>
         </div>
+
         <div className="generateLink">
           <button className="generate button" onClick={handleGenerateLink}>
             Generate Link

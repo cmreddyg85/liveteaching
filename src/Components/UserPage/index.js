@@ -10,6 +10,7 @@ import "./index.css";
 const UserPage = () => {
   const { userId } = useParams();
   const [dataFromDatabase, setDataFromDatabase] = useState("");
+  const [instrFromDatabase, setInstrFromDatabase] = useState("");
   const [topInputName, setTopInputName] = useState("");
   const [isTopRecording, setIsTopRecording] = useState(false);
 
@@ -28,8 +29,22 @@ const UserPage = () => {
       }
     });
 
+    const instructorRef = ref(database, `instructor${userId}`);
+
+    const unsubscribe1 = onValue(instructorRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setInstrFromDatabase(data.chatInputData || "");
+      } else {
+        setInstrFromDatabase("");
+      }
+    });
+
     // Cleanup listener on unmount
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      unsubscribe1();
+    };
   }, [userId]);
 
   const handleTopStartRecording = () => {
@@ -140,6 +155,36 @@ const UserPage = () => {
               Start
             </button>
           )}
+        </div>
+
+        <div
+          style={{
+            padding: "10px",
+            backgroundColor: "#ffebee",
+            border: "2px solid #f44336",
+            borderRadius: "6px",
+            marginBottom: "20px",
+            textAlign: "center",
+            fontWeight: "bold",
+            color: "#d32f2f",
+          }}
+        >
+          Instructions
+          <div
+            style={{
+              marginTop: "10px",
+              padding: "10px",
+              backgroundColor: "#fff",
+              borderRadius: "4px",
+              fontSize: "24px",
+              color: "#333",
+              textAlign: "left",
+            }}
+          >
+            <strong>
+              <span dangerouslySetInnerHTML={{ __html: instrFromDatabase }} />
+            </strong>
+          </div>
         </div>
 
         {/* Recording Indicator */}

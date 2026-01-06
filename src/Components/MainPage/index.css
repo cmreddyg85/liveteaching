@@ -294,6 +294,15 @@ details {
   margin-top: 40px;
 }
 
+.mainInstructionsInputContainer {
+  width: 95%;
+  height: 150px;
+  outline: black;
+  border: 1px solid black;
+  padding: 15px;
+  font-size: 20px;
+}
+
 .logIcon {
   font-size: 24px;
   margin-right: 5px;

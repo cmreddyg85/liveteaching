@@ -564,6 +564,98 @@ const commandss = [
       <p>SELECT MAX(salary) FROM employee WHERE salary &lt; (SELECT MAX(salary) FROM employee);</p>
     `,
   },
+
+  {
+  command: "SOLID Principles",
+  text: `
+    <li>
+      <b>What is Single Responsibility Principle (SRP)?</b><br/>
+      A class should have only one responsibility and one reason to change.
+      This improves maintainability and readability.<br/><br/>
+
+      <b>Live Example:</b><br/>
+      <pre>
+class InvoiceService {
+    void generateInvoice() {}
+}
+
+class EmailService {
+    void sendEmail() {}
+}
+      </pre>
+    </li>
+
+    <li>
+      <b>What is Open/Closed Principle (OCP)?</b><br/>
+      Classes should be open for extension but closed for modification.
+      New behavior should be added without changing existing code.<br/><br/>
+
+      <b>Live Example:</b><br/>
+      <pre>
+interface Discount {
+    double apply();
+}
+
+class FestivalDiscount implements Discount {
+    public double apply() { return 10; }
+}
+      </pre>
+    </li>
+
+    <li>
+      <b>What is Liskov Substitution Principle (LSP)?</b><br/>
+      Subclasses should be able to replace parent classes
+      without breaking application behavior.<br/><br/>
+
+      <b>Live Example:</b><br/>
+      <pre>
+class Bird {}
+
+class Sparrow extends Bird {
+    void fly() {}
+}
+      </pre>
+    </li>
+
+    <li>
+      <b>What is Interface Segregation Principle (ISP)?</b><br/>
+      Clients should not be forced to implement methods they do not use.
+      Prefer small and specific interfaces.<br/><br/>
+
+      <b>Live Example:</b><br/>
+      <pre>
+interface Workable {
+    void work();
+}
+
+interface Eatable {
+    void eat();
+}
+      </pre>
+    </li>
+
+    <li>
+      <b>What is Dependency Inversion Principle (DIP)?</b><br/>
+      High-level modules should not depend on low-level modules.
+      Both should depend on abstractions.<br/><br/>
+
+      <b>Live Example:</b><br/>
+      <pre>
+interface Database {
+    void save();
+}
+
+class OrderService {
+    Database db;
+    OrderService(Database db) {
+        this.db = db;
+    }
+}
+      </pre>
+    </li>
+  `,
+}
+
 ];
 
 

@@ -758,13 +758,6 @@ Never concatenate user input directly into SQL.
           `,
   },
   {
-    command: "Clustered vs Non-Clustered Index",
-    text: `
-      <p><strong>Clustered:</strong> Determines physical order of data; only one per table.</p>
-      <p><strong>Non-Clustered:</strong> Separate structure pointing to data; multiple allowed.</p>
-    `,
-  },
-  {
     command: "SQL Transactions & ACID",
     text: `
       <p>Transactions are single logical units of work following ACID: <strong>Atomicity</strong>, <strong>Consistency</strong>, <strong>Isolation</strong>, and <strong>Durability</strong>.</p>
@@ -791,12 +784,6 @@ Never concatenate user input directly into SQL.
     text: `
       <p><strong>CTE:</strong> Named temporary result set using <code>WITH</code>; improves readability and supports recursion.</p>
       <p><strong>Subquery:</strong> Nested query; can be messier and cannot be recursive.</p>
-    `,
-  },
-  {
-    command: "Stored Procedures",
-    text: `
-      <p>Precompiled SQL statements. Advantages: performance, security, reusability. Disadvantages: complexity, portability issues.</p>
     `,
   },
   {
@@ -861,7 +848,529 @@ Never concatenate user input directly into SQL.
     text: `
       <p>Approaches: Single DB/Shared Schema (TenantId column), Single DB/Separate Schema per tenant, or Database per tenant.</p>
           `,
-  }
+  },
+
+  {
+  "command": "SQL Experience or what have you done in sql",
+  "text": `
+    <p>Extensive experience in designing and managing relational databases using SQL.</p>
+    <ul>
+      <li>Written complex <b>SELECT</b> queries using <b>JOINs, subqueries, CTEs, and window functions</b>.</li>
+      <li>Handled <b>CRUD operations</b> and optimized queries using <b>indexes and execution plans</b>.</li>
+      <li>Created and maintained <b>tables, views, stored procedures, and functions</b>.</li>
+      <li>Ensured <b>data integrity, constraints, transactions, and security</b> in production systems.</li>
+    </ul>
+  `
+}
+
+
+{
+  "command": "SQL View",
+  "text": `
+    <p>A <b>View</b> is a virtual table created using a SQL query. It does not store data but shows data from one or more tables.</p>
+    <ul>
+      <li>Used to simplify complex queries.</li>
+      <li>Helps improve security by exposing only required columns.</li>
+      <li>Makes query reuse easier and cleaner.</li>
+    </ul>
+    <p><b>Example:</b></p>
+    <pre>
+CREATE VIEW EmployeeView AS
+SELECT Id, Name, Department
+FROM Employees
+WHERE IsActive = 1;
+    </pre>
+    <p>This view shows only active employees and hides sensitive columns.</p>
+  `
+}
+
+
+{
+  "command": "Stored Procedure and Function",
+  "text": `
+    <p><b>Stored Procedure</b> is a set of SQL statements saved in the database and executed when called.</p>
+    <ul>
+      <li>Used to perform business logic and complex operations.</li>
+      <li>Can return multiple values using OUT parameters.</li>
+      <li>Can perform INSERT, UPDATE, DELETE operations.</li>
+    </ul>
+
+    <p><b>Function</b> is a database object that returns a single value or a table.</p>
+    <ul>
+      <li>Mainly used for calculations and reusable logic.</li>
+      <li>Must return a value.</li>
+      <li>Can be used inside SELECT statements.</li>
+    </ul>
+
+    <p><b>Procedure vs Function</b></p>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th>Procedure</th>
+        <th>Function</th>
+      </tr>
+      <tr>
+        <td>May or may not return a value</td>
+        <td>Must return a value</td>
+      </tr>
+      <tr>
+        <td>Cannot be used in SELECT</td>
+        <td>Can be used in SELECT</td>
+      </tr>
+      <tr>
+        <td>Supports transactions</td>
+        <td>Does not support transactions</td>
+      </tr>
+      <tr>
+        <td>Used for business logic</td>
+        <td>Used for calculations</td>
+      </tr>
+    </table>
+  `
+}
+
+
+{
+  "command": "SQL Index",
+  "text": `
+    <p>An <b>Index</b> is used to speed up data retrieval from a table, similar to an index in a book.</p>
+
+    <p><b>Advantages</b></p>
+    <ul>
+      <li>Significantly improves SELECT query performance.</li>
+      <li>Reduces full table scans.</li>
+      <li>Helps in faster sorting and filtering of data.</li>
+    </ul>
+
+    <p><b>Disadvantages</b></p>
+    <ul>
+      <li>Uses additional disk storage.</li>
+      <li>Slows down INSERT, UPDATE, and DELETE operations.</li>
+      <li>Requires maintenance to keep indexes updated.</li>
+    </ul>
+
+    <p><b>Index Types</b></p>
+    <ul>
+      <li><b>Clustered Index</b> – Stores table data in sorted order physically.</li>
+      <li><b>Non-Clustered Index</b> – Separate structure pointing to table data.</li>
+      <li><b>Unique Index</b> – Prevents duplicate values.</li>
+      <li><b>Composite Index</b> – Created using multiple columns.</li>
+    </ul>
+
+    <p><b>Examples:</b></p>
+    <pre>
+-- Clustered Index
+CREATE CLUSTERED INDEX idx_emp_id ON Employees(Id);
+
+-- Non-Clustered Index
+CREATE NONCLUSTERED INDEX idx_emp_dept ON Employees(Department);
+
+-- Unique Index
+CREATE UNIQUE INDEX idx_emp_email ON Employees(Email);
+
+-- Composite Index
+CREATE INDEX idx_emp_name_dept ON Employees(Name, Department);
+    </pre>
+  `
+}
+
+
+{
+  "command": "Clustered vs Non-Clustered Index",
+  "text": `
+    <p><b>Clustered Index</b> defines the physical order of data in a table. A table can have only one clustered index.</p>
+    <ul>
+      <li>Data is stored in sorted order.</li>
+      <li>Faster for range queries.</li>
+      <li>Usually created on primary key.</li>
+    </ul>
+
+    <p><b>Non-Clustered Index</b> is a separate structure that points to the data rows. A table can have multiple non-clustered indexes.</p>
+    <ul>
+      <li>Does not change physical order of data.</li>
+      <li>Stores key values and row references.</li>
+      <li>Slower than clustered for range scans.</li>
+    </ul>
+
+    <p><b>Differences</b></p>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th>Clustered Index</th>
+        <th>Non-Clustered Index</th>
+      </tr>
+      <tr>
+        <td>Only one per table</td>
+        <td>Multiple per table</td>
+      </tr>
+      <tr>
+        <td>Physically sorts table data</td>
+        <td>Logical ordering only</td>
+      </tr>
+      <tr>
+        <td>Faster for range queries</td>
+        <td>Needs extra lookup</td>
+      </tr>
+    </table>
+
+    <p><b>Examples:</b></p>
+    <pre>
+-- Clustered Index
+CREATE CLUSTERED INDEX idx_emp_id ON Employees(Id);
+
+-- Non-Clustered Index
+CREATE NONCLUSTERED INDEX idx_emp_dept ON Employees(Department);
+    </pre>
+  `
+}
+
+
+{
+  "command": "SQL Keys",
+  "text": `
+    <p><b>Keys</b> in SQL are used to uniquely identify records in a table and to create relationships between tables.</p>
+
+    <p><b>Types of Keys</b></p>
+    <ul>
+      <li><b>Primary Key</b> – Uniquely identifies each record and does not allow NULL values.</li>
+      <li><b>Foreign Key</b> – Links one table to another table’s primary key.</li>
+      <li><b>Unique Key</b> – Ensures all values in a column are unique.</li>
+      <li><b>Candidate Key</b> – A column (or columns) that can be a primary key.</li>
+      <li><b>Composite Key</b> – A key made using more than one column.</li>
+      <li><b>Alternate Key</b> – Candidate keys not chosen as the primary key.</li>
+    </ul>
+
+    <p><b>Examples:</b></p>
+    <pre>
+-- Primary Key
+CREATE TABLE Employees (
+  Id INT PRIMARY KEY,
+  Email VARCHAR(100) UNIQUE
+);
+
+-- Foreign Key
+CREATE TABLE Orders (
+  OrderId INT PRIMARY KEY,
+  EmployeeId INT,
+  FOREIGN KEY (EmployeeId) REFERENCES Employees(Id)
+);
+
+-- Composite Key
+CREATE TABLE StudentMarks (
+  StudentId INT,
+  SubjectId INT,
+  PRIMARY KEY (StudentId, SubjectId)
+);
+    </pre>
+
+    <p>Keys help maintain <b>data integrity</b>, avoid duplicates, and define relationships between tables.</p>
+  `
+}
+
+{
+  "command": "SQL Query Optimization",
+  "text": `
+    <p><b>SQL Query Optimization</b> is the process of improving query performance to reduce execution time and resource usage.</p>
+
+    <p><b>Best Practices</b></p>
+    <ul>
+      <li>Use proper <b>indexes</b> on frequently filtered and joined columns.</li>
+      <li>Avoid using <b>SELECT *</b>; fetch only required columns.</li>
+      <li>Use <b>WHERE</b> clause to filter records early.</li>
+      <li>Prefer <b>JOINs</b> over subqueries when possible.</li>
+      <li>Use <b>EXPLAIN</b> or execution plans to analyze queries.</li>
+      <li>Avoid functions on indexed columns in WHERE clause.</li>
+    </ul>
+
+    <p><b>Example</b></p>
+    <pre>
+-- Non-Optimized Query
+SELECT *
+FROM Employees
+WHERE YEAR(JoiningDate) = 2024;
+
+-- Optimized Query
+SELECT Id, Name
+FROM Employees
+WHERE JoiningDate >= '2024-01-01'
+  AND JoiningDate < '2025-01-01';
+    </pre>
+
+    <p>Optimized queries improve <b>performance</b>, reduce <b>CPU and memory usage</b>, and scale better in production systems.</p>
+  `
+}
+
+{
+  "command": "Second Highest Salary",
+  "text": `
+    <p>The <b>Second Highest Salary</b> query is used to find the employee with the second highest salary from a table.</p>
+
+    <p><b>Approaches</b></p>
+    <ul>
+      <li>Using <b>ORDER BY</b> and <b>LIMIT / OFFSET</b></li>
+      <li>Using <b>Subquery</b></li>
+      <li>Using <b>Dense Rank</b> (recommended)</li>
+    </ul>
+
+    <p><b>Examples</b></p>
+
+    <p><b>1. Using ORDER BY</b></p>
+    <pre>
+SELECT Salary
+FROM Employees
+ORDER BY Salary DESC
+OFFSET 1 ROW FETCH NEXT 1 ROW ONLY;
+    </pre>
+
+    <p><b>2. Using Subquery</b></p>
+    <pre>
+SELECT MAX(Salary)
+FROM Employees
+WHERE Salary < (SELECT MAX(Salary) FROM Employees);
+    </pre>
+
+    <p><b>3. Using DENSE_RANK (Best Approach)</b></p>
+    <pre>
+SELECT Salary
+FROM (
+  SELECT Salary, DENSE_RANK() OVER (ORDER BY Salary DESC) AS rnk
+  FROM Employees
+) t
+WHERE rnk = 2;
+    </pre>
+
+    <p><b>Note:</b> <b>DENSE_RANK</b> handles duplicate salaries correctly.</p>
+  `
+}
+
+{
+  "command": "SQL PIVOT",
+  "text": `
+    <p><b>PIVOT</b> is used to convert rows into columns, making data easier to read and analyze.</p>
+
+    <p><b>Why use PIVOT?</b></p>
+    <ul>
+      <li>Transforms row-based data into column format.</li>
+      <li>Helpful for reports and summaries.</li>
+      <li>Improves data readability.</li>
+    </ul>
+
+    <p><b>Example</b></p>
+    <pre>
+SELECT *
+FROM (
+  SELECT EmployeeName, Month, Salary
+  FROM EmployeeSalary
+) src
+PIVOT (
+  SUM(Salary)
+  FOR Month IN ([Jan], [Feb], [Mar])
+) pvt;
+    </pre>
+
+    <p>This converts month-wise salary rows into columns for each employee.</p>
+  `
+}
+
+
+{
+  "command": "SQL CTE",
+  "text": `
+    <p><b>CTE (Common Table Expression)</b> is a temporary result set that can be referenced within a SELECT, INSERT, UPDATE, or DELETE statement.</p>
+
+    <p><b>Advantages</b></p>
+    <ul>
+      <li>Makes complex queries more readable and maintainable.</li>
+      <li>Helps break large queries into logical steps.</li>
+      <li>Can be referenced multiple times within the same query.</li>
+      <li>Useful for hierarchical and recursive queries.</li>
+    </ul>
+
+    <p><b>Examples</b></p>
+
+    <p><b>1. Simple CTE</b></p>
+    <pre>
+WITH EmployeeCTE AS (
+  SELECT Id, Name, Department, Salary
+  FROM Employees
+)
+SELECT *
+FROM EmployeeCTE
+WHERE Salary > 50000;
+    </pre>
+
+    <p><b>2. CTE with JOIN</b></p>
+    <pre>
+WITH DeptCTE AS (
+  SELECT d.Id, d.DepartmentName, e.Name
+  FROM Departments d
+  JOIN Employees e ON d.Id = e.DepartmentId
+)
+SELECT *
+FROM DeptCTE;
+    </pre>
+
+    <p><b>3. Recursive CTE</b></p>
+    <pre>
+WITH OrgCTE AS (
+  SELECT Id, Name, ManagerId
+  FROM Employees
+  WHERE ManagerId IS NULL
+  UNION ALL
+  SELECT e.Id, e.Name, e.ManagerId
+  FROM Employees e
+  JOIN OrgCTE o ON e.ManagerId = o.Id
+)
+SELECT *
+FROM OrgCTE;
+    </pre>
+
+    <p>CTEs exist only during query execution and do not store data permanently.</p>
+  `
+}
+
+{
+  "command": "SQL Joins",
+  "text": `
+    <p><b>JOIN</b> is used to combine data from two or more tables based on a related column.</p>
+
+    <p><b>Types of Joins</b></p>
+
+    <p><b>1. INNER JOIN</b> – Returns only matching records from both tables.</p>
+    <pre>
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+INNER JOIN Departments d
+ON e.DepartmentId = d.Id;
+    </pre>
+
+    <p><b>2. LEFT JOIN</b> – Returns all records from left table and matching records from right table.</p>
+    <pre>
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+LEFT JOIN Departments d
+ON e.DepartmentId = d.Id;
+    </pre>
+
+    <p><b>3. RIGHT JOIN</b> – Returns all records from right table and matching records from left table.</p>
+    <pre>
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+RIGHT JOIN Departments d
+ON e.DepartmentId = d.Id;
+    </pre>
+
+    <p><b>4. FULL OUTER JOIN</b> – Returns all records when there is a match in either table.</p>
+    <pre>
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+FULL OUTER JOIN Departments d
+ON e.DepartmentId = d.Id;
+    </pre>
+
+    <p><b>5. CROSS JOIN</b> – Returns the Cartesian product of both tables.</p>
+    <pre>
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+CROSS JOIN Departments d;
+    </pre>
+
+    <p><b>Summary</b></p>
+    <ul>
+      <li><b>INNER</b> – Matching data only</li>
+      <li><b>LEFT</b> – All left + matching right</li>
+      <li><b>RIGHT</b> – All right + matching left</li>
+      <li><b>FULL</b> – All records from both tables</li>
+      <li><b>CROSS</b> – Every combination</li>
+    </ul>
+  `
+}
+
+
+{
+  "command": "SQL Self Join",
+  "text": `
+    <p><b>SELF JOIN</b> is a join where a table is joined with itself.</p>
+    <p>It is mainly used to compare rows within the same table.</p>
+
+    <p><b>Use Case</b></p>
+    <ul>
+      <li>Employee–Manager relationship</li>
+      <li>Comparing records in the same table</li>
+    </ul>
+
+    <p><b>Example: Employee and Manager</b></p>
+    <pre>
+SELECT 
+  e.Name AS EmployeeName,
+  m.Name AS ManagerName
+FROM Employees e
+LEFT JOIN Employees m
+ON e.ManagerId = m.Id;
+    </pre>
+
+    <p>
+      In this example:
+      <ul>
+        <li><b>e</b> represents employee records</li>
+        <li><b>m</b> represents manager records</li>
+        <li>Both come from the same <b>Employees</b> table</li>
+      </ul>
+    </p>
+  `
+}
+
+
+{
+  "command": "RANK vs DENSE_RANK vs ROW_NUMBER",
+  "text": `
+    <p>These are <b>window functions</b> used to assign ranking numbers to rows based on ordering.</p>
+
+    <p><b>Differences</b></p>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th>Function</th>
+        <th>Description</th>
+        <th>Duplicate Values</th>
+        <th>Gaps in Ranking</th>
+      </tr>
+      <tr>
+        <td>ROW_NUMBER()</td>
+        <td>Assigns a unique number to each row</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>RANK()</td>
+        <td>Same rank for duplicates</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>DENSE_RANK()</td>
+        <td>Same rank for duplicates</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <p><b>Example</b></p>
+    <pre>
+SELECT Name, Salary,
+ROW_NUMBER() OVER (ORDER BY Salary DESC) AS RowNum,
+RANK() OVER (ORDER BY Salary DESC) AS RankNum,
+DENSE_RANK() OVER (ORDER BY Salary DESC) AS DenseRankNum
+FROM Employees;
+    </pre>
+
+    <p><b>Result Explanation</b></p>
+    <ul>
+      <li>If two employees have the same salary:</li>
+      <li><b>ROW_NUMBER</b> gives different numbers</li>
+      <li><b>RANK</b> skips the next number</li>
+      <li><b>DENSE_RANK</b> does not skip numbers</li>
+    </ul>
+  `
+}
+
 
 ];
 

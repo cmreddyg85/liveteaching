@@ -861,9 +861,7 @@ Never concatenate user input directly into SQL.
       <li>Ensured <b>data integrity, constraints, transactions, and security</b> in production systems.</li>
     </ul>
   `
-}
-
-
+  },
 {
   "command": "SQL View",
   "text": `
@@ -883,7 +881,7 @@ WHERE IsActive = 1;
     <p>This view shows only active employees and hides sensitive columns.</p>
   `
 }
-
+,
 
 {
   "command": "Stored Procedure and Function",
@@ -927,7 +925,7 @@ WHERE IsActive = 1;
     </table>
   `
 }
-
+,
 
 {
   "command": "SQL Index",
@@ -972,7 +970,7 @@ CREATE INDEX idx_emp_name_dept ON Employees(Name, Department);
     </pre>
   `
 }
-
+,
 
 {
   "command": "Clustered vs Non-Clustered Index",
@@ -1022,7 +1020,7 @@ CREATE NONCLUSTERED INDEX idx_emp_dept ON Employees(Department);
   `
 }
 
-
+,
 {
   "command": "SQL Keys",
   "text": `
@@ -1064,7 +1062,7 @@ CREATE TABLE StudentMarks (
     <p>Keys help maintain <b>data integrity</b>, avoid duplicates, and define relationships between tables.</p>
   `
 }
-
+,
 {
   "command": "SQL Query Optimization",
   "text": `
@@ -1097,7 +1095,7 @@ WHERE JoiningDate >= '2024-01-01'
     <p>Optimized queries improve <b>performance</b>, reduce <b>CPU and memory usage</b>, and scale better in production systems.</p>
   `
 }
-
+,
 {
   "command": "Second Highest Salary",
   "text": `
@@ -1140,7 +1138,7 @@ WHERE rnk = 2;
     <p><b>Note:</b> <b>DENSE_RANK</b> handles duplicate salaries correctly.</p>
   `
 }
-
+,
 {
   "command": "SQL PIVOT",
   "text": `
@@ -1169,7 +1167,7 @@ PIVOT (
     <p>This converts month-wise salary rows into columns for each employee.</p>
   `
 }
-
+,
 
 {
   "command": "SQL CTE",
@@ -1226,7 +1224,7 @@ FROM OrgCTE;
     <p>CTEs exist only during query execution and do not store data permanently.</p>
   `
 }
-
+,
 {
   "command": "SQL Joins",
   "text": `
@@ -1284,7 +1282,7 @@ CROSS JOIN Departments d;
   `
 }
 
-
+,
 {
   "command": "SQL Self Join",
   "text": `
@@ -1317,7 +1315,7 @@ ON e.ManagerId = m.Id;
     </p>
   `
 }
-
+,
 
 {
   "command": "RANK vs DENSE_RANK vs ROW_NUMBER",

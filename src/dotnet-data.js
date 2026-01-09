@@ -1,5 +1,65 @@
 const commandss = [
+  {
+  "command": "Professional Introduction",
+  "text": `
+    <p>Hi! I am [Your Name],</p>
 
+    <p>I have over five years of experience in developing scalable and user-friendly web applications using <b>React.js</b> and <b>.NET</b>.</p>
+
+    <p>On the front end, I specialize in building interactive and responsive user interfaces with React, HTML, CSS, and JavaScript.</p>
+
+    <p>On the backend, I work with <b>.NET Core</b> and <b>Entity Framework</b> to design robust APIs and handle business logic.</p>
+
+    <p>I have strong experience working with <b>SQL</b> for database design, query optimization, and data integrity.</p>
+
+    <p>I also have hands-on experience deploying and monitoring applications on <b>Azure</b>, including App Services and Azure SQL.</p>
+
+    <p>I collaborate closely with designers and cross-functional teams to deliver high-quality solutions.</p>
+
+    <p>I continuously learn new technologies and follow best practices to build reliable and high-performance applications.</p>
+  `
+}
+,
+{
+  "command": "Roles and Responsibilities",
+  "text": `
+    <p><b>Roles and Responsibilities</b></p>
+
+    <ul>
+      <li>Design and develop scalable web applications using <b>React.js</b> and <b>.NET Core</b>.</li>
+      <li>Build reusable and responsive UI components following best practices.</li>
+      <li>Develop and maintain RESTful APIs using <b>.NET Core</b> and <b>Entity Framework</b>.</li>
+      <li>Design and optimize <b>SQL</b> queries, indexes, and database schemas.</li>
+      <li>Implement authentication, authorization, and secure data access.</li>
+      <li>Deploy, monitor, and troubleshoot applications on <b>Azure</b>.</li>
+      <li>Collaborate with designers, QA, and cross-functional teams.</li>
+      <li>Participate in code reviews and ensure high code quality.</li>
+      <li>Identify performance bottlenecks and implement optimizations.</li>
+      <li>Follow Agile practices and contribute to sprint planning and delivery.</li>
+    </ul>
+  `
+
+},
+{
+  "command": "Day-to-Day Responsibilities",
+  "text": `
+    <p><b>Day-to-Day Responsibilities</b></p>
+
+    <ul>
+      <li>Develop and enhance UI features using <b>React.js</b> based on business requirements.</li>
+      <li>Implement backend APIs using <b>.NET Core</b> and <b>Entity Framework</b>.</li>
+      <li>Write, review, and optimize <b>SQL</b> queries for daily data operations.</li>
+      <li>Fix bugs, handle production issues, and perform root cause analysis.</li>
+      <li>Participate in daily stand-up meetings and sprint activities.</li>
+      <li>Collaborate with UI/UX designers to implement pixel-perfect screens.</li>
+      <li>Perform code reviews and ensure coding standards are followed.</li>
+      <li>Deploy builds and monitor application health on <b>Azure</b>.</li>
+      <li>Write unit tests and support QA during testing cycles.</li>
+      <li>Continuously refactor code to improve performance and maintainability.</li>
+    </ul>
+  `
+}
+,
   {
     command: ".net",
     text: `

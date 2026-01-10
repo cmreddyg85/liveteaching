@@ -1428,6 +1428,247 @@ FROM Employees;
     </ul>
   `
 }
+,
+   /* ================= Azure Questions ================= */
+
+{
+  "command": "What have you done in Azure?",
+  "text": `
+    <p>I have worked extensively on designing, deploying, securing, and monitoring cloud-native applications in Azure.</p>
+    <ul>
+      <li>Hosted enterprise applications using <b>Azure App Service</b> and <b>AKS</b>.</li>
+      <li>Designed CI/CD pipelines using <b>Azure DevOps</b>.</li>
+      <li>Implemented monitoring, logging, and alerts using <b>Application Insights</b> and <b>Azure Monitor</b>.</li>
+      <li>Handled security using <b>Azure AD, Key Vault, Managed Identity</b>.</li>
+      <li>Optimized cost, performance, and scalability for production workloads.</li>
+    </ul>
+  `
+},
+{
+  "command": "Azure Services",
+  "text": `
+    <p>I have worked with multiple Azure services across compute, storage, security, and integration layers.</p>
+    <ul>
+      <li><b>Compute</b>: App Service, Azure Functions, AKS</li>
+      <li><b>Data</b>: Azure SQL, Blob Storage, Cosmos DB</li>
+      <li><b>Integration</b>: Service Bus, Event Grid</li>
+      <li><b>Security</b>: Azure AD, Key Vault, Managed Identity</li>
+      <li><b>Monitoring</b>: Application Insights, Log Analytics</li>
+      <li><b>DevOps</b>: Azure DevOps Pipelines</li>
+    </ul>
+  `
+}
+
+,
+
+{
+  "command": "Azure Functions",
+  "text": `
+    <p>Azure Functions are serverless components used for event-driven and background processing.</p>
+
+    <p><b>Real-Time Usage</b></p>
+    <ul>
+      <li>Background jobs</li>
+      <li>Message processing from Service Bus</li>
+      <li>Scheduled cleanup tasks</li>
+    </ul>
+
+    <p><b>Example</b></p>
+    <pre>
+[FunctionName("ProcessOrders")]
+public async Task Run(
+  [ServiceBusTrigger("orders")] string message,
+  ILogger log)
+{
+  log.LogInformation(message);
+}
+    </pre>
+  `
+}
+,
+{
+  "command": "Azure Application Insights",
+  "text": `
+    <p>Used for end-to-end monitoring and performance diagnostics in production systems.</p>
+    <ul>
+      <li>Tracked API latency, failure rates, and dependencies</li>
+      <li>Monitored SQL and external service calls</li>
+      <li>Configured alerts for SLA breaches</li>
+    </ul>
+  `
+}
+,
+
+{
+  "command": "Azure Key Vault & Blob Storage",
+  "text": `
+    <p><b>Key Vault</b> is used to store secrets securely, and <b>Blob Storage</b> is used for unstructured data.</p>
+    <ul>
+      <li>Stored DB passwords, API keys, certificates in Key Vault</li>
+      <li>Used Managed Identity to access secrets</li>
+      <li>Stored documents, images, logs in Blob Storage</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "AKS (Azure Kubernetes Service)",
+  "text": `
+    <p>AKS is used to run containerized microservices at scale.</p>
+    <ul>
+      <li>Deployed multiple microservices</li>
+      <li>Enabled auto-scaling and rolling updates</li>
+      <li>Used Helm and YAML for deployments</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "Azure Active Directory",
+  "text": `
+    <p>Azure AD is used for authentication, authorization, and identity management.</p>
+    <ul>
+      <li>Integrated OAuth2 and OpenID Connect</li>
+      <li>Enabled role-based access control (RBAC)</li>
+      <li>Secured APIs using Azure AD tokens</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "Managed Identity",
+  "text": `
+    <p>Managed Identity allows Azure services to access other resources securely without credentials.</p>
+    <p><b>Example</b>: App Service accessing Key Vault and Azure SQL without storing secrets.</p>
+  `
+}
+,
+
+{
+  "command": "Secure App Service",
+  "text": `
+    <ul>
+      <li>Enabled HTTPS and TLS</li>
+      <li>Used Azure AD authentication</li>
+      <li>Integrated Key Vault for secrets</li>
+      <li>Configured IP restrictions and private endpoints</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "Azure Service Bus",
+  "text": `
+    <p>Service Bus is used for reliable asynchronous communication.</p>
+    <p><b>Use Case</b>: Decoupling order processing and payment services.</p>
+  `
+}
+,
+{
+  "command": "Deploy .NET / React App",
+  "text": `
+    <ul>
+      <li>React hosted on App Service or Blob Storage</li>
+      <li>.NET APIs hosted on Azure App Service</li>
+      <li>CI/CD implemented using Azure DevOps</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "Blue-Green Deployment",
+  "text": `
+    <p>Two identical environments are maintained. Traffic is switched after validation.</p>
+    <p>Implemented using <b>App Service Slots</b>.</p>
+  `
+}
+,
+{
+  "command": "Canary Deployment",
+  "text": `
+    <p>New version is released to a small percentage of users before full rollout.</p>
+    <p>Used for minimizing risk in production.</p>
+  `
+}
+,
+{
+  "command": "Rollback Strategy",
+  "text": `
+    <ul>
+      <li>Swap deployment slots</li>
+      <li>Redeploy previous build</li>
+      <li>Automated rollback using pipelines</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "Track Application Performance",
+  "text": `
+    <ul>
+      <li>Application Insights dashboards</li>
+      <li>Distributed tracing</li>
+      <li>Custom telemetry and alerts</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "Secret Management",
+  "text": `
+    <p>Secrets are never stored in code. All secrets are managed using Key Vault and Managed Identity.</p>
+  `
+}
+,
+{
+  "command": "Fault Tolerance in Azure",
+  "text": `
+    <ul>
+      <li>Availability Zones</li>
+      <li>Load balancing</li>
+      <li>Auto-scaling</li>
+      <li>Health probes</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "Secure Public API",
+  "text": `
+    <ul>
+      <li>Azure API Management</li>
+      <li>Azure AD authentication</li>
+      <li>Rate limiting and throttling</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "Scalable Microservices Architecture",
+  "text": `
+    <ul>
+      <li>Microservices hosted on AKS</li>
+      <li>API Gateway using APIM</li>
+      <li>Service Bus for async communication</li>
+      <li>Centralized logging and monitoring</li>
+    </ul>
+  `
+}
+,
+{
+  "command": "On-Prem to Azure Migration",
+  "text": `
+    <ul>
+      <li>Assessment using Azure Migrate</li>
+      <li>Database migration to Azure SQL</li>
+      <li>Application modernization</li>
+      <li>Security and networking setup</li>
+    </ul>
+  `
+}
+
+
+
 
 
 ];

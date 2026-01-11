@@ -342,7 +342,273 @@ Strategy enables dynamic behavior selection.
 CQRS separates read and write responsibilities.
     `,
   },
+{
+  "command": ".NET Core",
+  "text": `
+    <p>.NET Core is a cross-platform, open-source framework for building high-performance applications.</p>
+    <p>It supports Windows, Linux, and macOS.</p>
+    <p>Used to build APIs, microservices, and cloud-native apps.</p>
+    <p>Has better performance and scalability than .NET Framework.</p>
+    <p>Widely used with Docker and Azure.</p>
+  `
+}
+,
+{
+  "command": ".NET Framework vs .NET Core",
+  "text": `
+    <p>.NET Framework is Windows-only, while .NET Core is cross-platform.</p>
+    <p>.NET Core supports microservices and cloud deployment.</p>
+    <p>.NET Core has better performance and modular design.</p>
+    <p>.NET Framework is mainly used for legacy applications.</p>
+    <p>New development prefers .NET Core.</p>
+  `
+}
+,
 
+{
+  "command": "SOLID Principles",
+  "text": `
+    <p>SOLID principles help build maintainable and scalable code.</p>
+    <p><b>S</b>: Single Responsibility – One class, one job.</p>
+    <p><b>O</b>: Open/Closed – Open for extension, closed for modification.</p>
+    <p><b>L</b>: Liskov Substitution – Child can replace parent.</p>
+    <p><b>D</b>: Dependency Inversion – Depend on abstractions.</p>
+  `
+}
+,
+
+{
+  "command": "IEnumerable vs IQueryable",
+  "text": `
+    <p>IEnumerable executes queries in memory.</p>
+    <p>IQueryable executes queries in the database.</p>
+    <p>IQueryable improves performance for large datasets.</p>
+    <p>IEnumerable fetches all data first.</p>
+    <p>Use IQueryable with Entity Framework.</p>
+  `
+}
+,
+{
+  "command": "Task vs Async/Await",
+  "text": `
+    <p>Task represents an asynchronous operation.</p>
+    <p>async/await simplifies async code readability.</p>
+    <p>Async improves scalability and responsiveness.</p>
+    <p>Used heavily in API calls and I/O operations.</p>
+    <p>Prevents thread blocking.</p>
+  `
+}
+,
+{
+  "command": "Dependency Injection (DI)",
+  "text": `
+    <p>DI provides dependencies from outside the class.</p>
+    <p>Reduces tight coupling.</p>
+    <p>Improves testability and maintainability.</p>
+    <p>Built-in DI container in .NET Core.</p>
+    <p>Widely used in enterprise apps.</p>
+  `
+}
+,
+{
+  "command": "DI Lifetime",
+  "text": `
+    <p>Singleton – One instance for entire app (Logging).</p>
+    <p>Scoped – One instance per request (DbContext).</p>
+    <p>Transient – New instance every time (Email Service).</p>
+    <p>Choosing correct lifetime avoids memory leaks.</p>
+    <p>Very important in production apps.</p>
+  `
+}
+,
+{
+  "command": "Middleware",
+  "text": `
+    <p>Middleware handles requests and responses in pipeline.</p>
+    <p>Executed sequentially.</p>
+    <p>Used for logging, authentication, error handling.</p>
+    <p>Configured in Startup.cs.</p>
+    <p>Runs before controller.</p>
+  `
+}
+,
+{
+  "command": "Use vs Run",
+  "text": `
+    <p>Use allows request to move to next middleware.</p>
+    <p>Run terminates the pipeline.</p>
+    <p>Use is for chaining.</p>
+    <p>Run is for final handling.</p>
+    <p>Order matters.</p>
+  `
+}
+,
+{
+  "command": "Middleware Real-Time Example",
+  "text": `
+    <p>Logging middleware logs every request.</p>
+    <p>Authentication middleware validates tokens.</p>
+    <p>Exception middleware handles errors globally.</p>
+    <p>Used in all enterprise APIs.</p>
+    <p>Improves observability.</p>
+  `
+}
+,
+{
+  "command": "LINQ",
+  "text": `
+    <p>LINQ is used to query data in a readable way.</p>
+    <p>Works with collections, databases, XML.</p>
+    <p>Improves code readability.</p>
+    <p>Reduces boilerplate loops.</p>
+    <p>Widely used with EF.</p>
+  `
+}
+,
+{
+  "command": "const vs readonly",
+  "text": `
+    <p>const is compile-time constant.</p>
+    <p>readonly is runtime constant.</p>
+    <p>const is faster but inflexible.</p>
+    <p>readonly is preferred for config values.</p>
+    <p>Both ensure immutability.</p>
+  `
+}
+,
+{
+  "command": "Middleware vs Action Filter",
+  "text": `
+    <p>Middleware works globally.</p>
+    <p>Action Filter works at controller/action level.</p>
+    <p>Middleware runs before MVC.</p>
+    <p>Filters run inside MVC pipeline.</p>
+    <p>Used together.</p>
+  `
+}
+,
+{
+  "command": "Action Filters",
+  "text": `
+    <p>Authorization Filter</p>
+    <p>Action Filter</p>
+    <p>Result Filter</p>
+    <p>Exception Filter</p>
+    <p>Used for cross-cutting concerns.</p>
+  `
+}
+,
+{
+  "command": "Action Filter Real-Time Example",
+  "text": `
+    <p>Logging API request/response.</p>
+    <p>Validating model state.</p>
+    <p>Authorization checks.</p>
+    <p>Performance monitoring.</p>
+    <p>Reusable across controllers.</p>
+  `
+}
+,
+{
+  "command": "var Keyword",
+  "text": `
+    <p>var allows implicit typing.</p>
+    <p>Type decided at compile time.</p>
+    <p>Improves readability.</p>
+    <p>Does not mean dynamic.</p>
+    <p>Strongly typed.</p>
+  `
+}
+,
+{
+  "command": "Entity Framework",
+  "text": `
+    <p>EF is an ORM for database access.</p>
+    <p>Reduces SQL boilerplate.</p>
+    <p>Supports LINQ queries.</p>
+    <p>Handles migrations.</p>
+    <p>Improves productivity.</p>
+  `
+}
+,
+
+{
+  "command": "Second Highest Salary in EF",
+  "text": `
+    <p>Use LINQ with ordering.</p>
+    <p>Order by Salary descending.</p>
+    <p>Skip first and take next.</p>
+    <p>Handled at DB level.</p>
+    <p>Efficient and clean.</p>
+  `
+}
+,
+{
+  "command": "Microservices",
+  "text": `
+    <p>Microservices break app into small services.</p>
+    <p>Each service is independently deployable.</p>
+    <p>Uses REST or messaging.</p>
+    <p>Improves scalability.</p>
+    <p>Popular in cloud systems.</p>
+  `
+}
+,
+{
+  "command": "Monolithic vs Microservices",
+  "text": `
+    <p>Monolith is single deployable unit.</p>
+    <p>Microservices are distributed.</p>
+    <p>Microservices scale independently.</p>
+    <p>Monolith is simpler initially.</p>
+    <p>Microservices suit large systems.</p>
+  `
+}
+,
+{
+  "command": "Design Patterns in .NET Core",
+  "text": `
+    <p>Repository – Data access abstraction.</p>
+    <p>Factory – Object creation logic.</p>
+    <p>Singleton – Single instance.</p>
+    <p>Strategy – Dynamic behavior.</p>
+    <p>Used in real projects.</p>
+  `
+}
+,
+{
+  "command": "Saga Pattern",
+  "text": `
+    <p>Used for distributed transactions.</p>
+    <p>Each step has a compensating action.</p>
+    <p>Used in order/payment workflows.</p>
+    <p>Ensures data consistency.</p>
+    <p>Very common in microservices.</p>
+  `
+}
+,
+{
+  "command": "Exception Handling in .NET Core",
+  "text": `
+    <p>Global exception middleware used.</p>
+    <p>Centralized error handling.</p>
+    <p>Consistent error responses.</p>
+    <p>Logged in Application Insights.</p>
+    <p>Improves reliability.</p>
+  `
+}
+,
+{
+  "command": "Circuit Breaker",
+  "text": `
+    <p>Prevents cascading failures.</p>
+    <p>Stops calling failing services.</p>
+    <p>Uses Polly library.</p>
+    <p>Improves resilience.</p>
+    <p>Critical in microservices.</p>
+  `
+}
+,
   /* ================= SQL ================= */
 
   {
